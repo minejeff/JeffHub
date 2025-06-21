@@ -7,7 +7,7 @@ local username = player.Name
 
 -- CONFIG
 local correctKey = "JEFFFLIXBRASIL2025"
-local painelURL = "loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"))()"
+local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
 local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
 local getKeyURL = "https://link-hub.net/1362624/tp5BWUUBkYEj"
 
@@ -59,6 +59,7 @@ status.BackgroundTransparency = 1
 status.Font = Enum.Font.Code
 status.TextSize = 14
 
+-- Webhook
 local function sendToWebhook()
     local data = {
         ["content"] = "**Novo acesso ao JeffHub**",
@@ -77,6 +78,7 @@ local function sendToWebhook()
     })
 end
 
+-- Botão Verificar Key
 local checkButton = Instance.new("TextButton", frame)
 checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
 checkButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -87,6 +89,7 @@ checkButton.Font = Enum.Font.GothamBold
 checkButton.TextSize = 14
 Instance.new("UICorner", checkButton)
 
+-- Botão Get Key
 local getKeyButton = Instance.new("TextButton", frame)
 getKeyButton.Position = UDim2.new(0.55, 0, 0.8, 0)
 getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -115,7 +118,8 @@ checkButton.MouseButton1Click:Connect(function()
         img.Size = UDim2.new(0.5, 0, 0.5, 0)
         img.Position = UDim2.new(0.25, 0, 0.25, 0)
         img.BackgroundTransparency = 1
-        img.Image = "rbxassetid://17549204679" -- <- Substitua pela thumbnail real
+        img.Image = "rbxassetid://17549204679" -- Substitua se quiser outra imagem
+
         local txt = Instance.new("TextLabel", img)
         txt.Size = UDim2.new(1, 0, 0.2, 0)
         txt.Position = UDim2.new(0, 0, 1.05, 0)
@@ -128,7 +132,8 @@ checkButton.MouseButton1Click:Connect(function()
         wait(3)
         thumb:Destroy()
 
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"))()
+        -- ✅ Agora carrega o painel corretamente!
+        loadstring(game:HttpGet(https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua))()
     else
         status.Text = "Key incorreta! Tente novamente."
     end
