@@ -1,62 +1,135 @@
--- JEFFHUB UNIVERSAL SCRIPT (Final) -- Suporte: King Legacy, Blox Fruits, BlueLock Rivals -- Inclui: Key System + Tela de Load + Painel Vertical + FPS Boost + AutoFarm + Auto Bounty + AutoSpin + Webhook + Stretch UI + Save + Muito mais
+-- main.lua - Loader com sistema de key e carregamento visual
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local userId = player.UserId
+local username = player.Name
 
--- Variáveis Globais getgenv().JeffHub_Key = "JEFFFLIXBRASIL2025" getgenv().Webhook = "https://discord.com/api/webhooks/..." -- Substitua pelo seu webhook getgenv().GamePlaceId = game.PlaceId
+-- CONFIG
+local correctKey = "JEFFFLIXBRASIL2025"
+local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
+local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
+local getKeyURL = "https://link-hub.net/1362624/tp5BWUUBkYEj"
 
--- Tela de Key System local Players = game:GetService("Players") local player = Players.LocalPlayer local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui")) gui.IgnoreGuiInset = true gui.ResetOnSpawn = false gui.Name = "JeffHubKeyUI"
+-- GUI: Key System
+local ScreenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+ScreenGui.Name = "JeffHub_KeySystem"
+ScreenGui.ResetOnSpawn = false
 
-local frame = Instance.new("Frame", gui) frame.Size = UDim2.new(0.4, 0, 0.3, 0) frame.Position = UDim2.new(0.3, 0, 0.35, 0) frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30) frame.BorderSizePixel = 0 frame.BackgroundTransparency = 0.1 frame.Name = "KeyFrame"
+local frame = Instance.new("Frame", ScreenGui)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.BackgroundTransparency = 0.3
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.ClipsDescendants = true
+frame.Name = "KeyFrame"
+frame.Active = true
+frame.Draggable = true
+frame:TweenSize(UDim2.new(0, 300, 0, 230), "Out", "Back", 0.5)
 
-local title = Instance.new("TextLabel", frame) title.Size = UDim2.new(1, 0, 0.25, 0) title.Position = UDim2.new(0, 0, 0, 0) title.Text = "JEFFHUB - KING LEGACY [UPD 8]" title.Font = Enum.Font.GothamBold title.TextColor3 = Color3.fromRGB(255, 255, 255) title.TextScaled = true
+Instance.new("UICorner", frame)
 
-local input = Instance.new("TextBox", frame) input.Size = UDim2.new(0.9, 0, 0.25, 0) input.Position = UDim2.new(0.05, 0, 0.3, 0) input.PlaceholderText = "Digite a Key..." input.Text = "" input.Font = Enum.Font.Gotham tinput.TextScaled = true input.BackgroundColor3 = Color3.fromRGB(45, 45, 45) input.TextColor3 = Color3.new(1, 1, 1)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "JEFFHUB - KING LEGACY [UPD 8]"
+title.TextColor3 = Color3.fromRGB(255, 0, 0)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 18
 
-local checkBtn = Instance.new("TextButton", frame) checkBtn.Size = UDim2.new(0.4, 0, 0.2, 0) checkBtn.Position = UDim2.new(0.05, 0, 0.6, 0) checkBtn.Text = "Check Key" checkBtn.Font = Enum.Font.GothamBold checkBtn.TextScaled = true checkBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 255) checkBtn.TextColor3 = Color3.new(1, 1, 1)
+local textbox = Instance.new("TextBox", frame)
+textbox.PlaceholderText = "Digite sua KEY aqui..."
+textbox.Position = UDim2.new(0.1, 0, 0.4, 0)
+textbox.Size = UDim2.new(0.8, 0, 0, 30)
+textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textbox.TextColor3 = Color3.new(1, 1, 1)
+textbox.Text = ""
+textbox.Font = Enum.Font.Code
+textbox.TextSize = 16
+Instance.new("UICorner", textbox)
 
-local getKeyBtn = Instance.new("TextButton", frame) getKeyBtn.Size = UDim2.new(0.4, 0, 0.2, 0) getKeyBtn.Position = UDim2.new(0.55, 0, 0.6, 0) getKeyBtn.Text = "Get Key" getKeyBtn.Font = Enum.Font.GothamBold getKeyBtn.TextScaled = true getKeyBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100) getKeyBtn.TextColor3 = Color3.new(1, 1, 1)
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1, 0, 0, 20)
+status.Position = UDim2.new(0, 0, 0.65, 0)
+status.Text = ""
+status.TextColor3 = Color3.new(1, 1, 1)
+status.BackgroundTransparency = 1
+status.Font = Enum.Font.Code
+status.TextSize = 14
 
-getKeyBtn.MouseButton1Click:Connect(function() setclipboard("https://link-hub.net/1362624/tp5BWUUBkYEj") end)
-
-checkBtn.MouseButton1Click:Connect(function() if input.Text == getgenv().JeffHub_Key then frame.Visible = false
-
--- Tela de transição com logo
-    local logoGui = Instance.new("ScreenGui", player.PlayerGui)
-    logoGui.Name = "JeffHubLoading"
-
-    local logo = Instance.new("ImageLabel", logoGui)
-    logo.Size = UDim2.new(1, 0, 1, 0)
-    logo.Position = UDim2.new(0, 0, 0, 0)
-    logo.BackgroundTransparency = 1
-    logo.Image = "rbxassetid://17413806167"
-    logo.ImageTransparency = 0.1
-
-    local texto = Instance.new("TextLabel", logo)
-    texto.Size = UDim2.new(1, 0, 0.1, 0)
-    texto.Position = UDim2.new(0, 0, 0.8, 0)
-    texto.Text = "Obrigado Por usar O JeffHub"
-    texto.Font = Enum.Font.GothamBold
-    texto.TextColor3 = Color3.fromRGB(255, 0, 0)
-    texto.BackgroundTransparency = 1
-    texto.TextScaled = true
-
-    local barra = Instance.new("Frame", logo)
-    barra.Size = UDim2.new(0, 0, 0.01, 0)
-    barra.Position = UDim2.new(0.2, 0, 0.92, 0)
-    barra.BackgroundColor3 = Color3.fromRGB(80, 0, 140)
-
-    barra:TweenSize(UDim2.new(0.6, 0, 0.01, 0), "Out", "Quad", 3, true)
-    wait(4.5)
-
-    logoGui:Destroy()
-
-    -- Carrega o JeffHub principal
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/main.lua"))()
-else
-    input.Text = "Key inválida!"
+local function sendToWebhook()
+    local data = {
+        ["content"] = "**Novo acesso ao JeffHub**",
+        ["embeds"] = {{
+            ["title"] = "Dados do Usuário",
+            ["description"] = "User: `" .. username .. "`\nID: `" .. userId .. "`",
+            ["color"] = 65280
+        }}
+    }
+    local final = HttpService:JSONEncode(data)
+    syn.request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = final
+    })
 end
 
+local checkButton = Instance.new("TextButton", frame)
+checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
+checkButton.Size = UDim2.new(0.35, 0, 0, 30)
+checkButton.Text = "Check Key"
+checkButton.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+checkButton.TextColor3 = Color3.new(1,1,1)
+checkButton.Font = Enum.Font.GothamBold
+checkButton.TextSize = 14
+Instance.new("UICorner", checkButton)
+
+local getKeyButton = Instance.new("TextButton", frame)
+getKeyButton.Position = UDim2.new(0.55, 0, 0.8, 0)
+getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
+getKeyButton.Text = "Get Key"
+getKeyButton.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
+getKeyButton.TextColor3 = Color3.new(1,1,1)
+getKeyButton.Font = Enum.Font.GothamBold
+getKeyButton.TextSize = 14
+Instance.new("UICorner", getKeyButton)
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard(getKeyURL)
+    status.Text = "Link copiado para a área de transferência!"
 end)
 
--- Você pode adaptar o restante do hub (farm, esp, etc) no arquivo principal "main.lua" -- Recomendo organizar as funções por jogo e salvar config via DataStore2 localmente
+checkButton.MouseButton1Click:Connect(function()
+    if textbox.Text == correctKey then
+        status.Text = "Key correta! Carregando..."
+        sendToWebhook()
 
--- Fim do script
+        -- Thumbnail de carregamento
+        frame:Destroy()
+        local thumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+        thumb.Name = "JeffHub_Thumbnail"
+        local img = Instance.new("ImageLabel", thumb)
+        img.Size = UDim2.new(0.5, 0, 0.5, 0)
+        img.Position = UDim2.new(0.25, 0, 0.25, 0)
+        img.BackgroundTransparency = 1
+        img.Image = "rbxassetid://17549204679" -- <- Substitua pela thumbnail real
+        local txt = Instance.new("TextLabel", img)
+        txt.Size = UDim2.new(1, 0, 0.2, 0)
+        txt.Position = UDim2.new(0, 0, 1.05, 0)
+        txt.Text = "Obrigado Por usar O JeffHub"
+        txt.TextColor3 = Color3.new(1, 0, 0)
+        txt.BackgroundTransparency = 1
+        txt.Font = Enum.Font.GothamBold
+        txt.TextSize = 16
 
+        wait(3)
+        thumb:Destroy()
+
+        loadstring(game:HttpGet(painelURL))()
+    else
+        status.Text = "Key incorreta! Tente novamente."
+    end
+end)
