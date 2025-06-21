@@ -133,7 +133,7 @@ checkButton.MouseButton1Click:Connect(function()
         thumb:Destroy()
 
         -- ✅ Agora carrega o painel corretamente!
-        loadstring(game:HttpGet(https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua))()
+        "loadstring(game:HttpGet(https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua'))()"
     else
         status.Text = "Key incorreta! Tente novamente."
     end
