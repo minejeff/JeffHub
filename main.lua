@@ -7,7 +7,7 @@ local username = player.Name
 
 -- CONFIG
 local correctKey = "JEFFFLIXBRASIL2025"
-local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
+local painelURL = "loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"))()"
 local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
 local getKeyURL = "https://link-hub.net/1362624/tp5BWUUBkYEj"
 
@@ -128,7 +128,7 @@ checkButton.MouseButton1Click:Connect(function()
         wait(3)
         thumb:Destroy()
 
-        loadstring(game:HttpGet(painelURL))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"))()
     else
         status.Text = "Key incorreta! Tente novamente."
     end
