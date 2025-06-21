@@ -1,18 +1,17 @@
--- main.lua - Loader com sistema de key e carregamento visual
-
+-- main.lua - Loader com Key System e painel
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local userId = player.UserId
 local username = player.Name
 
--- CONFIGURAÇÕES
+-- CONFIGURAÇÃO
 local correctKey = "JEFFFLIXBRASIL2025"
-local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
 local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
 local getKeyURL = "https://link-hub.net/1362624/tp5BWUUBkYEj"
+local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
 
--- GUI: Key System
+-- GUI
 local ScreenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 ScreenGui.Name = "JeffHub_KeySystem"
 ScreenGui.ResetOnSpawn = false
@@ -20,16 +19,13 @@ ScreenGui.ResetOnSpawn = false
 local frame = Instance.new("Frame", ScreenGui)
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
 frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-frame.Size = UDim2.new(0, 300, 0, 200)
-frame.BackgroundTransparency = 0.3
+frame.Size = UDim2.new(0, 300, 0, 230)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BackgroundTransparency = 0.3
 frame.BorderSizePixel = 0
-frame.ClipsDescendants = true
-frame.Name = "KeyFrame"
 frame.Active = true
 frame.Draggable = true
-frame:TweenSize(UDim2.new(0, 300, 0, 230), "Out", "Back", 0.5)
-
+frame.Name = "KeyFrame"
 Instance.new("UICorner", frame)
 
 local title = Instance.new("TextLabel", frame)
@@ -70,18 +66,15 @@ local function sendToWebhook()
             ["color"] = 65280
         }}
     }
-    local final = HttpService:JSONEncode(data)
-    pcall(function()
-        syn.request({
-            Url = webhook,
-            Method = "POST",
-            Headers = {["Content-Type"] = "application/json"},
-            Body = final
-        })
-    end)
+    syn.request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = HttpService:JSONEncode(data)
+    })
 end
 
--- Botão Check Key
+-- Botões
 local checkButton = Instance.new("TextButton", frame)
 checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
 checkButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -92,7 +85,6 @@ checkButton.Font = Enum.Font.GothamBold
 checkButton.TextSize = 14
 Instance.new("UICorner", checkButton)
 
--- Botão Get Key
 local getKeyButton = Instance.new("TextButton", frame)
 getKeyButton.Position = UDim2.new(0.55, 0, 0.8, 0)
 getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -103,27 +95,28 @@ getKeyButton.Font = Enum.Font.GothamBold
 getKeyButton.TextSize = 14
 Instance.new("UICorner", getKeyButton)
 
--- GET KEY
 getKeyButton.MouseButton1Click:Connect(function()
     setclipboard(getKeyURL)
     status.Text = "Link copiado para a área de transferência!"
 end)
 
--- CHECK KEY
 checkButton.MouseButton1Click:Connect(function()
     if textbox.Text == correctKey then
         status.Text = "Key correta! Carregando..."
         sendToWebhook()
-
-        -- Tela de carregamento
         frame:Destroy()
+
+        -- Tela de Loading
         local thumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
         thumb.Name = "JeffHub_Thumbnail"
+
         local img = Instance.new("ImageLabel", thumb)
-        img.Size = UDim2.new(0.5, 0, 0.5, 0)
-        img.Position = UDim2.new(0.25, 0, 0.25, 0)
-        img.BackgroundTransparency = 1
-        img.Image = "rbxassetid://17549204679"
+        img.Size = UDim2.new(0, 400, 0, 300)
+        img.Position = UDim2.new(0.5, -200, 0.5, -150)
+        img.BackgroundTransparency = 0
+        img.Image = "rbxassetid://7141958455" -- imagem oficial do King Legacy
+        img.ScaleType = Enum.ScaleType.Crop
+
         local txt = Instance.new("TextLabel", img)
         txt.Size = UDim2.new(1, 0, 0.2, 0)
         txt.Position = UDim2.new(0, 0, 1.05, 0)
@@ -136,13 +129,13 @@ checkButton.MouseButton1Click:Connect(function()
         wait(3)
         thumb:Destroy()
 
-        -- Carregar painel completo
         local success, result = pcall(function()
-            loadstring(game:HttpGet(painelURL))()
+            return loadstring(game:HttpGet(painelURL))()
         end)
+
         if not success then
-            warn("Erro ao carregar painel:", result)
-            status.Text = "Erro ao carregar painel!"
+            warn("Erro ao carregar o painel:", result)
+            status.Text = "Erro ao carregar o painel."
         end
     else
         status.Text = "Key incorreta! Tente novamente."
