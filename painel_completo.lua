@@ -1,33 +1,132 @@
--- painel_completo.lua - JEFFHUB UNIVERSAL -- Adaptado para layout vertical com suporte a King Legacy, Blox Fruits e BlueLock Rivals
+if game.PlaceId ~= 4520749081 then return end -- Garante que só funcione no King Legacy
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))() local Window = library.CreateLib("JeffHub - Universal", "BloodTheme")
+-- Tela carregando (pós-key)
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "JeffHubUI"
+gui.ResetOnSpawn = false
 
--- Autosave config (simples) _G.JeffHub_Config = _G.JeffHub_Config or {} local SaveConfig = function() writefile("jeffhub_config.json", game:GetService("HttpService"):JSONEncode(_G.JeffHub_Config)) end local LoadConfig = function() if isfile("jeffhub_config.json") then _G.JeffHub_Config = game:GetService("HttpService"):JSONDecode(readfile("jeffhub_config.json")) end end pcall(LoadConfig)
+local mainFrame = Instance.new("Frame", gui)
+mainFrame.Size = UDim2.new(0, 320, 0, 480)
+mainFrame.Position = UDim2.new(0.5, -160, 0.5, -240)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainFrame.BorderSizePixel = 0
+mainFrame.BackgroundTransparency = 0.1
+mainFrame.ClipsDescendants = true
 
--- Aba: Configurações Gerais local TabConfig = Window:NewTab("Config") local SectionUI = TabConfig:NewSection("Interface")
+local uicorner = Instance.new("UICorner", mainFrame)
+uicorner.CornerRadius = UDim.new(0, 16)
 
-SectionUI:NewButton("Esconder Notificações", "Remove mensagens de mortes de NPCs", function() game:GetService("StarterGui"):SetCore("ResetButtonCallback", false) for _,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do if v:IsA("TextLabel") and v.Text:match("você matou") then v:Destroy() end end end)
+local title = Instance.new("TextLabel", mainFrame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "📺 JEFFHUB - KING LEGACY [UPD 8]"
+title.Font = Enum.Font.Fantasy
+title.TextColor3 = Color3.fromRGB(255, 80, 80)
+title.BackgroundTransparency = 1
+title.TextSize = 20
 
-SectionUI:NewButton("Fonte: Minecraft", "Muda para fonte pixelada", function() _G.JeffHub_Config.fonte = "Minecraft" SaveConfig() end) SectionUI:NewButton("Fonte: Gótica", "Muda para fonte estilizada", function() _G.JeffHub_Config.fonte = "Gotica" SaveConfig() end) SectionUI:NewButton("Autosave Config", "Salva preferências", SaveConfig)
+-- Função simples de botão
+local function createButton(name, callback)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(1, -20, 0, 40)
+	btn.Position = UDim2.new(0, 10, 0, 0)
+	btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	btn.Text = name
+	btn.Font = Enum.Font.SourceSansBold
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.TextSize = 18
 
-SectionUI:NewButton("Tela Esticada", "Aplica modo esticado", function() getgenv().Resolution = {[".gg/scripters"] = 0.65} local Camera = workspace.CurrentCamera if getgenv().gg_scripters == nil then game:GetService("RunService").RenderStepped:Connect(function() Camera.CFrame = Camera.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, getgenv().Resolution[".gg/scripters"], 0, 0, 0, 1) end) end getgenv().gg_scripters = "Aori0001" end)
+	local corner = Instance.new("UICorner", btn)
+	corner.CornerRadius = UDim.new(0, 10)
 
-SectionUI:NewButton("Canal do JeffFlixBrasil", "Se inscreva no canal!", function() setclipboard("https://youtube.com/canal/@JeffFlixBrasil") end)
+	btn.MouseButton1Click:Connect(callback)
+	return btn
+end
 
--- Seletor por jogo local gameName = "Outro" if game.PlaceId == 4520749081 then gameName = "King Legacy" end if game.PlaceId == 2753915549 then gameName = "Blox Fruits" end if game.PlaceId == 18668065416 then gameName = "BlueLock Rivals" end
+-- Scroll de opções
+local scroll = Instance.new("ScrollingFrame", mainFrame)
+scroll.Size = UDim2.new(1, 0, 1, -50)
+scroll.Position = UDim2.new(0, 0, 0, 50)
+scroll.BackgroundTransparency = 1
+scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+scroll.ScrollBarThickness = 4
 
--- Funções por jogo if gameName == "King Legacy" then local TabKL = Window:NewTab("King Legacy") local secFarm = TabKL:NewSection("Farm") secFarm:NewToggle("Farm Level Automaticamente", "Ativa farm", function(v) print("[KL] AutoFarm: ", v) end)
+local layout = Instance.new("UIListLayout", scroll)
+layout.Padding = UDim.new(0, 6)
 
-local secExtra = TabKL:NewSection("Extras")
-secExtra:NewButton("TP para NPC de Quest", "Teleporta automaticamente", function()
-    print("TP ativado")
+-- Funções simuladas
+local function notReady() warn("Função em construção") end
+local function autoFarm()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/modules/autofarm.lua"))()
+end
+local function autoBounty()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/modules/autobounty.lua"))()
+end
+local function boostFPS()
+	getgenv().Resolution = {[".gg/scripters"] = 0.65}
+	local Camera = workspace.CurrentCamera
+	if not getgenv().gg_scripters then
+		game:GetService("RunService").RenderStepped:Connect(function()
+			Camera.CFrame = Camera.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, getgenv().Resolution[".gg/scripters"], 0, 0, 0, 1)
+		end)
+	end
+	getgenv().gg_scripters = "Aori0001"
+end
+local function hideNotifs()
+	for _, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
+		if v:IsA("TextLabel") and v.Text:find("Você matou") then
+			v:Destroy()
+		end
+	end
+end
+
+-- Botões
+local buttons = {
+	{"Farm Level Automático", autoFarm},
+	{"Auto Bounty PvP", autoBounty},
+	{"Boost FPS", boostFPS},
+	{"Kaitun Mode", notReady},
+	{"HIDE NOTIFICS", hideNotifs},
+	{"Canal do JeffFlixBrasil", function()
+		setclipboard("https://youtube.com/canal/@JeffFlixBrasil")
+	end},
+}
+
+-- Inserir botões no scroll
+for _, b in ipairs(buttons) do
+	local btn = createButton(b[1], b[2])
+	btn.Parent = scroll
+end
+
+-- Autosave simples
+pcall(function()
+	local folder = Instance.new("Folder", game:GetService("Players").LocalPlayer)
+	folder.Name = "JeffHub_Save"
 end)
 
-elseif gameName == "Blox Fruits" then local TabBF = Window:NewTab("Blox Fruits") local secAuto = TabBF:NewSection("Auto Bounty") secAuto:NewButton("Ativar Auto Bounty", "Versão rápida com skills", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))() end)
+-- Ativar "esticado"
+mainFrame.Size = UDim2.new(0, 360, 0, 540)
 
-elseif gameName == "BlueLock Rivals" then local TabBL = Window:NewTab("BlueLock") local secRoleta = TabBL:NewSection("Roleta Automática") secRoleta:NewToggle("Girar Roleta", "Se tiver spins, gira automaticamente", function(v) print("Roleta: ", v) end) local secBoost = TabBL:NewSection("Desempenho") secBoost:NewButton("Boost FPS", "Aplica resolução baixa e remove skins", function() for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Accessory") or v:IsA("MeshPart") then v:Destroy() end end getgenv().Resolution = {[".gg/scripters"] = 0.65} local Camera = workspace.CurrentCamera game:GetService("RunService").RenderStepped:Connect(function() Camera.CFrame = Camera.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, getgenv().Resolution[".gg/scripters"], 0, 0, 0, 1) end) getgenv().gg_scripters = "Aori0001" end) end
+-- Mover o hub com mouse
+local UIS = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos
 
--- Kaitun universal local TabKaitun = Window:NewTab("Kaitun") local secKaitun = TabKaitun:NewSection("Kaitun") secKaitun:NewButton("Ativar Kaitun", "Executa o script kaitun", function() loadstring(game:HttpGet("https://raw.githubusercontent.com/KaitunHub/Main/main/Kaitun.lua"))() end)
+mainFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
 
-print("JeffHub carregado com sucesso - vFinal")
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
 
+UIS.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
+		local delta = input.Position - dragStart
+		mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+end)
