@@ -49,7 +49,7 @@ checkBtn.MouseButton1Click:Connect(function() if input.Text == getgenv().JeffHub
     logoGui:Destroy()
 
     -- Carrega o JeffHub principal
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/SEU_USUARIO/JeffHub/main/main.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/minejeff/JeffHub/main/main.lua"))()
 else
     input.Text = "Key inválida!"
 end
