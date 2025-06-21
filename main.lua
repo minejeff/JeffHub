@@ -1,11 +1,12 @@
 -- main.lua - Loader com sistema de key e carregamento visual
+
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local userId = player.UserId
 local username = player.Name
 
--- CONFIG
+-- CONFIGURAÇÕES
 local correctKey = "JEFFFLIXBRASIL2025"
 local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
 local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
@@ -70,15 +71,17 @@ local function sendToWebhook()
         }}
     }
     local final = HttpService:JSONEncode(data)
-    syn.request({
-        Url = webhook,
-        Method = "POST",
-        Headers = {["Content-Type"] = "application/json"},
-        Body = final
-    })
+    pcall(function()
+        syn.request({
+            Url = webhook,
+            Method = "POST",
+            Headers = {["Content-Type"] = "application/json"},
+            Body = final
+        })
+    end)
 end
 
--- Botão de Check Key
+-- Botão Check Key
 local checkButton = Instance.new("TextButton", frame)
 checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
 checkButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -100,20 +103,20 @@ getKeyButton.Font = Enum.Font.GothamBold
 getKeyButton.TextSize = 14
 Instance.new("UICorner", getKeyButton)
 
+-- GET KEY
 getKeyButton.MouseButton1Click:Connect(function()
     setclipboard(getKeyURL)
     status.Text = "Link copiado para a área de transferência!"
 end)
 
--- Quando clicar em verificar a key
+-- CHECK KEY
 checkButton.MouseButton1Click:Connect(function()
     if textbox.Text == correctKey then
         status.Text = "Key correta! Carregando..."
         sendToWebhook()
 
+        -- Tela de carregamento
         frame:Destroy()
-
-        -- Tela de loading
         local thumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
         thumb.Name = "JeffHub_Thumbnail"
         local img = Instance.new("ImageLabel", thumb)
@@ -133,7 +136,14 @@ checkButton.MouseButton1Click:Connect(function()
         wait(3)
         thumb:Destroy()
 
-        loadstring(game:HttpGet(painelURL))()
+        -- Carregar painel completo
+        local success, result = pcall(function()
+            loadstring(game:HttpGet(painelURL))()
+        end)
+        if not success then
+            warn("Erro ao carregar painel:", result)
+            status.Text = "Erro ao carregar painel!"
+        end
     else
         status.Text = "Key incorreta! Tente novamente."
     end
