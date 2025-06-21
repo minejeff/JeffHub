@@ -78,7 +78,7 @@ local function sendToWebhook()
     })
 end
 
--- Botão Verificar Key
+-- Botão de Check Key
 local checkButton = Instance.new("TextButton", frame)
 checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
 checkButton.Size = UDim2.new(0.35, 0, 0, 30)
@@ -105,21 +105,22 @@ getKeyButton.MouseButton1Click:Connect(function()
     status.Text = "Link copiado para a área de transferência!"
 end)
 
+-- Quando clicar em verificar a key
 checkButton.MouseButton1Click:Connect(function()
     if textbox.Text == correctKey then
         status.Text = "Key correta! Carregando..."
         sendToWebhook()
 
-        -- Thumbnail de carregamento
         frame:Destroy()
+
+        -- Tela de loading
         local thumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
         thumb.Name = "JeffHub_Thumbnail"
         local img = Instance.new("ImageLabel", thumb)
         img.Size = UDim2.new(0.5, 0, 0.5, 0)
         img.Position = UDim2.new(0.25, 0, 0.25, 0)
         img.BackgroundTransparency = 1
-        img.Image = "rbxassetid://17549204679" -- Substitua se quiser outra imagem
-
+        img.Image = "rbxassetid://17549204679"
         local txt = Instance.new("TextLabel", img)
         txt.Size = UDim2.new(1, 0, 0.2, 0)
         txt.Position = UDim2.new(0, 0, 1.05, 0)
@@ -132,8 +133,7 @@ checkButton.MouseButton1Click:Connect(function()
         wait(3)
         thumb:Destroy()
 
-        -- ✅ Agora carrega o painel corretamente!
-        "loadstring(game:HttpGet(https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua'))()"
+        loadstring(game:HttpGet(painelURL))()
     else
         status.Text = "Key incorreta! Tente novamente."
     end
