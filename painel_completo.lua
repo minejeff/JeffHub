@@ -1,34 +1,140 @@
-if game.PlaceId ~= 4520749081 then return end -- Somente King Legacy
+-- main.lua - Loader com sistema de key e carregamento visual
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local userId = player.UserId
+local username = player.Name
 
-local gui = Instance.new("ScreenGui", game.CoreGui)
-gui.Name = "JeffHub_Test"
-gui.ResetOnSpawn = false
+-- CONFIG
+local correctKey = "JEFFFLIXBRASIL2025"
+local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
+local webhook = "https://canary.discord.com/api/webhooks/1385719487650725978/_bHW63ZXHuxbOBpVVXvtQDjD2lU7CE8kcHE8Mg3-vABmDxdEpkjn7EA-QYUaKpuWwTsV"
+local getKeyURL = "https://link-hub.net/1362624/tp5BWUUBkYEj"
 
-local main = Instance.new("Frame", gui)
-main.Size = UDim2.new(0, 320, 0, 480)
-main.Position = UDim2.new(0.5, -160, 0.5, -240)
-main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-main.BorderSizePixel = 0
+-- GUI: Key System
+local ScreenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+ScreenGui.Name = "JeffHub_KeySystem"
+ScreenGui.ResetOnSpawn = false
 
-local title = Instance.new("TextLabel", main)
+local frame = Instance.new("Frame", ScreenGui)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.BackgroundTransparency = 0.3
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.ClipsDescendants = true
+frame.Name = "KeyFrame"
+frame.Active = true
+frame.Draggable = true
+frame:TweenSize(UDim2.new(0, 300, 0, 230), "Out", "Back", 0.5)
+
+Instance.new("UICorner", frame)
+
+local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 40)
-title.Text = "✅ JeffHub - Painel Funcionando!"
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Text = "JEFFHUB - KING LEGACY [UPD 8]"
+title.TextColor3 = Color3.fromRGB(255, 0, 0)
 title.BackgroundTransparency = 1
-title.Font = Enum.Font.GothamBold
-title.TextSize = 20
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 18
 
-local btn = Instance.new("TextButton", main)
-btn.Position = UDim2.new(0.1, 0, 0.3, 0)
-btn.Size = UDim2.new(0.8, 0, 0, 40)
-btn.Text = "Clique aqui"
-btn.Font = Enum.Font.Gotham
-btn.TextSize = 16
-btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-btn.TextColor3 = Color3.new(1, 1, 1)
-btn.MouseButton1Click:Connect(function()
-    print("✅ Botão do painel funcionando!")
+local textbox = Instance.new("TextBox", frame)
+textbox.PlaceholderText = "Digite sua KEY aqui..."
+textbox.Position = UDim2.new(0.1, 0, 0.4, 0)
+textbox.Size = UDim2.new(0.8, 0, 0, 30)
+textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textbox.TextColor3 = Color3.new(1, 1, 1)
+textbox.Text = ""
+textbox.Font = Enum.Font.Code
+textbox.TextSize = 16
+Instance.new("UICorner", textbox)
+
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1, 0, 0, 20)
+status.Position = UDim2.new(0, 0, 0.65, 0)
+status.Text = ""
+status.TextColor3 = Color3.new(1, 1, 1)
+status.BackgroundTransparency = 1
+status.Font = Enum.Font.Code
+status.TextSize = 14
+
+-- Webhook
+local function sendToWebhook()
+    local data = {
+        ["content"] = "**Novo acesso ao JeffHub**",
+        ["embeds"] = {{
+            ["title"] = "Dados do Usuário",
+            ["description"] = "User: `" .. username .. "`\nID: `" .. userId .. "`",
+            ["color"] = 65280
+        }}
+    }
+    local final = HttpService:JSONEncode(data)
+    syn.request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = final
+    })
+end
+
+-- Botão de Check Key
+local checkButton = Instance.new("TextButton", frame)
+checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
+checkButton.Size = UDim2.new(0.35, 0, 0, 30)
+checkButton.Text = "Check Key"
+checkButton.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+checkButton.TextColor3 = Color3.new(1,1,1)
+checkButton.Font = Enum.Font.GothamBold
+checkButton.TextSize = 14
+Instance.new("UICorner", checkButton)
+
+-- Botão Get Key
+local getKeyButton = Instance.new("TextButton", frame)
+getKeyButton.Position = UDim2.new(0.55, 0, 0.8, 0)
+getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
+getKeyButton.Text = "Get Key"
+getKeyButton.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
+getKeyButton.TextColor3 = Color3.new(1,1,1)
+getKeyButton.Font = Enum.Font.GothamBold
+getKeyButton.TextSize = 14
+Instance.new("UICorner", getKeyButton)
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard(getKeyURL)
+    status.Text = "Link copiado para a área de transferência!"
 end)
 
-Instance.new("UICorner", main)
-Instance.new("UICorner", btn)
+-- Quando clicar em verificar a key
+checkButton.MouseButton1Click:Connect(function()
+    if textbox.Text == correctKey then
+        status.Text = "Key correta! Carregando..."
+        sendToWebhook()
+
+        frame:Destroy()
+
+        -- Tela de loading
+        local thumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+        thumb.Name = "JeffHub_Thumbnail"
+        local img = Instance.new("ImageLabel", thumb)
+        img.Size = UDim2.new(0.5, 0, 0.5, 0)
+        img.Position = UDim2.new(0.25, 0, 0.25, 0)
+        img.BackgroundTransparency = 1
+        img.Image = "rbxassetid://17549204679"
+        local txt = Instance.new("TextLabel", img)
+        txt.Size = UDim2.new(1, 0, 0.2, 0)
+        txt.Position = UDim2.new(0, 0, 1.05, 0)
+        txt.Text = "Obrigado Por usar O JeffHub"
+        txt.TextColor3 = Color3.new(1, 0, 0)
+        txt.BackgroundTransparency = 1
+        txt.Font = Enum.Font.GothamBold
+        txt.TextSize = 16
+
+        wait(3)
+        thumb:Destroy()
+
+        loadstring(game:HttpGet(painelURL))()
+    else
+        status.Text = "Key incorreta! Tente novamente."
+    end
+end)
