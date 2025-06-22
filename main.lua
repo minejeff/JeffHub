@@ -125,7 +125,7 @@ checkBtn.MouseButton1Click:Connect(function()
 		loading:Destroy()
 
 		local success, err = pcall(function()
-			loadstring(game:HttpGet(painelURL))()
+			loadstring(game:HttpGet("raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua))()
 		end)
 		if not success then
 			warn("Falha ao carregar painel:", err)
