@@ -1,2 +1,153 @@
+-- main.lua com sistema de Key TEMP + PERMA e webhook ofuscado
 
-loadstring("\108\111\99\97\108\32\72\116\116\112\83\101\114\118\105\99\101\32\61\32\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\34\72\116\116\112\83\101\114\118\105\99\101\34\41\10\108\111\99\97\108\32\80\108\97\121\101\114\115\32\61\32\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\34\80\108\97\121\101\114\115\34\41\10\108\111\99\97\108\32\112\32\61\32\80\108\97\121\101\114\115\46\76\111\99\97\108\80\108\97\121\101\114\10\108\111\99\97\108\32\117\115\101\114\32\61\32\112\46\78\97\109\101\10\108\111\99\97\108\32\117\115\101\11473\68\32\61\32\112\46\85\115\101\114\73\100\10\10\108\111\99\97\108\32\99\111\114\114\101\99\116\75\101\121\32\61\32\34\74\69\70\70\70\76\73\88\66\82\65\83\73\76\50\48\50\53\34\10\108\111\99\97\108\32\119\101\98\104\111\111\107\32\61\32\34\104\116\116\112\115\58\47\47\100\105\115\99\111\114\100\46\99\111\109\47\97\112\105\47\119\101\98\104\111\111\107\115\47\49\51\56\55\52\55\55\48\57\51\53\55\56\57\54\57\50\53\57\47\88\49\104\89\111\119\113\85\115\82\98\69\89\52\73\74\48\80\114\100\72\105\118\95\114\49\77\115\78\102\57\68\56\86\54\50\74\106\116\105\78\115\86\120\50\115\78\51\121\54\117\113\89\101\68\81\71\122\52\78\100\55\103\49\88\73\111\57\34\10\10\105\102\32\103\97\109\101\46\80\108\97\99\101\73\100\32\126\61\32\52\53\50\48\55\52\57\48\56\49\32\116\104\101\110\10\32\32\114\101\116\117\114\110\10\101\110\100\10\10\115\121\110\46\114\101\113\117\101\115\116\123\10\9\85\114\108\32\61\32\119\101\98\104\111\111\107\44\10\9\77\101\116\104\111\100\32\61\32\34\80\79\83\84\34\44\10\9\72\101\97\100\101\114\115\32\61\32\123\91\34\67\111\110\116\101\110\116\45\84\121\112\101\34\93\61\34\97\112\112\108\105\99\97\116\105\111\110\47\106\115\111\110\34\125\44\10\9\66\111\100\121\32\61\32\72\116\116\112\83\101\114\118\105\99\101\58\74\83\79\78\69\110\99\111\100\101\123\10\9\9\91\34\99\111\110\116\101\110\116\34\93\61\34\42\42\32\78\111\118\111\32\97\99\101\115\115\111\32\97\111\32\74\101\102\102\72\117\98\34\44\10\9\9\91\34\101\109\98\101\100\115\34\93\61\123\123\116\105\116\108\101\61\34\68\97\100\111\115\32\100\111\32\85\115\117\225\114\105\111\34\44\100\101\115\99\114\105\112\116\105\111\110\61\34\85\115\101\114\58\32\96\96\34..117\115\101\114\46\46\34\96\96\92\110\73\68\58\32\96\96\34..117\115\101\11473\68\46\46\34\96\96\34\44\99\111\108\111\114\61\54\53\50\56\48\125\125\10\9\125\10\125\41\10\10\108\111\99\97\108\32\71\117\105\32\61\32\73\110\115\116\97\110\99\101\46\110\101\119\40\34\83\99\114\101\101\110\71\117\105\34\44\32\112\58\87\97\105\116\70\111\114\67\104\105\108\100\40\34\80\108\97\121\101\114\71\117\105\34\41\41\10\71\117\105\46\78\97\109\101\32\61\32\34\74\101\102\102\72\117\98\75\101\121\71\85\73\34\10\108\111\99\97\108\32\70\114\97\109\101\32\61\32\73\110\115\116\97\110\99\101\46\110\101\119\40\34\70\114\97\109\101\34\44\32\71\117\105\41\10\70\114\97\109\101\46\83\105\122\101 \61 \85\68\105\109\50\46\110\101\119\40\48\44\51\48\48\44\48\44\50\48\48\41\10\70\114\97\109\101\46\80\111\115\105\116\105\111\110 \61 \85\68\105\109\50\46\110\101\119\40\48\46\53\44\48\46\53\44\48\44\48\41\10\70\114\97\109\101\46\66\97\99\107\103\114\111\117\110\100\67\111\108\111\114\51 \61 \67\111\108\111\114\51\46\110\101\119\40\51\48\44\51\48\44\51\48\41\10\70\114\97\109\101\46\78\97\109\101 \61 \34\75\101\121\70\114\97\109\101\34\10\10\108\111\99\97\108\32\84\101\120\116\66\111\120 \61 \73\110\115\116\97\110\99\101\46\110\101\119\40\34\84\101\120\116\66\111\120\34\44\32\70\114\97\109\101\41\10\84\101\120\116\66\111\120\46\83\105\122\101 \61 \85\68\105\109\50\46\110\101\119\40\48\46\56\44\32\48\44\32\48\44\32\51\48\41\10\84\101\120\116\66\111\120\46\80\111\115\105\116\105\111\110 \61 \85\68\105\109\50\46\110\101\119\40\48\46\49\44\32\48\46\52\44\32\48\44\32\48\41\10\84\101\120\116\66\111\120\46\80\108\97\99\101\104\111\108\100\101\114\84\101\120\116 \61 \34\68\105\103\105\116\101\32\115\117\97\32\75\69\89\46\46\46\34\10\84\101\120\116\66\111\120\46\70\111\110\116 \61 \69\110\117\109\46\70\111\110\116\46\71\111\116\104\97\109\66\108\97\99\107\10\84\101\120\116\66\111\120\46\84\101\120\116 \61 \34\34\10\10-- Botão para validar\10\108\111\99\97\108\32\66\84\78 \61 \73\110\115\116\97\110\99\101\46\110\101\119\40\34\84\101\120\116\66\117\116\116\111\110\34\44\32\70\114\97\109\101\41\10\66\84\78\46\84\101\120\116 \61 \34\67\104\101\99\107 \75\101\121\34\10\66\84\78\46\80\111\115\105\116\105\111\110 \61 \85\68\105\109\50\46\110\101\119\40\48\46\49\44\48\46\56\44\48\44\48\46\56\41\10\66\84\78\46\83\105\122\101 \61 \85\68\105\109\50\46\110\101\119\40\48\46\52\44\48\44\48\44\51\48\41\10\66\84\78\46\66\97\99\107\103\114\111\117\110\100\67\111\108\111\114\51 \61 \67\111\108\111\114\51\46\110\101\119\40\55\48\44\49\51\48\44\49\56\48\41\10\10-- Validação\10\66\84\78\46\77\111\117\115\101\66\117\116\116\111\110\49\67\108\105\99\107\58\67\111\110\110\101\99\116\40\102\117\110\99\116\105\111\110\40\41\10\9\105\102\32\84\101\120\116\66\111\120\46\84\101\120\116 \61\61 \99\111\114\114\101\99\116\75\101\121 \116\104\101\110\10\9\9\71\117\105\58\68\101\115\116\114\111\121\40\41\10\9\9\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\105\110\101\106\101\102\102\47\74\101\102\102\72\117\98\47\109\97\105\110\47\112\97\105\110\101\108\95\99\111\109\112\108\101\116\111\46\108\117\97\34\41\41\10\9\101\110\100\10\101\110\100\41\10")()
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local userId = player.UserId
+local username = player.Name
+
+-- CONFIGS
+local TEMP_KEY = "CINEVS2025-TEMP"
+local PERMA_KEY = "CINEVS2025-PERMA"
+local getKeyURL = "https://link-target.net/1362624/cinevskey"
+local painelURL = "https://raw.githubusercontent.com/minejeff/JeffHub/main/painel_completo.lua"
+local storageFile = "JeffKey_" .. userId .. ".json"
+
+-- Webhook ofuscado
+local webhook = HttpService:JSONDecode(HttpService:JSONEncode({
+    url = "https://discord.com/api/webhooks/1387477093578969259/X1hYowqUsRbEY4IJ0PrdHiv_r1MsNf9D8V62JjtiNsVx2sN3y6uqYeDQGz4Nd7g1XIo9"
+})).url
+
+-- Tela
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "Jeff_KeyGUI"
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.ClipsDescendants = true
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner", frame)
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "🔐 JeffHub Key System"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamBold
+title.TextSize = 18
+
+local textbox = Instance.new("TextBox", frame)
+textbox.PlaceholderText = "Insira sua Key..."
+textbox.Position = UDim2.new(0.1, 0, 0.4, 0)
+textbox.Size = UDim2.new(0.8, 0, 0, 30)
+textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textbox.TextColor3 = Color3.new(1, 1, 1)
+textbox.Text = ""
+textbox.Font = Enum.Font.Code
+textbox.TextSize = 16
+Instance.new("UICorner", textbox)
+
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1, 0, 0, 20)
+status.Position = UDim2.new(0, 0, 0.65, 0)
+status.Text = ""
+status.TextColor3 = Color3.new(1, 1, 1)
+status.BackgroundTransparency = 1
+status.Font = Enum.Font.Code
+status.TextSize = 14
+
+local function saveTempKey()
+    local data = {
+        timestamp = tick()
+    }
+    writefile(storageFile, HttpService:JSONEncode(data))
+end
+
+local function isTempKeyValid()
+    if isfile(storageFile) then
+        local content = HttpService:JSONDecode(readfile(storageFile))
+        return tick() - content.timestamp <= 86400
+    end
+    return false
+end
+
+local function sendWebhook()
+    local data = {
+        content = "**Acesso ao JeffHub Liberado**",
+        embeds = {{
+            title = "🧠 Key Verificada",
+            description = "Usuário: `" .. username .. "`\nID: `" .. userId .. "`",
+            color = 65280
+        }}
+    }
+    syn.request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = HttpService:JSONEncode(data)
+    })
+end
+
+local checkButton = Instance.new("TextButton", frame)
+checkButton.Position = UDim2.new(0.1, 0, 0.8, 0)
+checkButton.Size = UDim2.new(0.35, 0, 0, 30)
+checkButton.Text = "Verificar"
+checkButton.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+checkButton.TextColor3 = Color3.new(1, 1, 1)
+checkButton.Font = Enum.Font.GothamBold
+checkButton.TextSize = 14
+Instance.new("UICorner", checkButton)
+
+local getKeyButton = Instance.new("TextButton", frame)
+getKeyButton.Position = UDim2.new(0.55, 0, 0.8, 0)
+getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
+getKeyButton.Text = "Obter Key"
+getKeyButton.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
+getKeyButton.TextColor3 = Color3.new(1, 1, 1)
+getKeyButton.Font = Enum.Font.GothamBold
+getKeyButton.TextSize = 14
+Instance.new("UICorner", getKeyButton)
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard(getKeyURL)
+    status.Text = "Link copiado para a área de transferência!"
+end)
+
+local function loadPainel()
+    gui:Destroy()
+    local loadThumb = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+    loadThumb.Name = "JeffHub_Thumb"
+    local label = Instance.new("TextLabel", loadThumb)
+    label.Size = UDim2.new(0.4, 0, 0.1, 0)
+    label.Position = UDim2.new(0.3, 0, 0.45, 0)
+    label.Text = "Obrigado Por usar O JeffHub"
+    label.Font = Enum.Font.GothamBold
+    label.TextColor3 = Color3.fromRGB(255, 0, 0)
+    label.BackgroundTransparency = 1
+    label.TextScaled = true
+    wait(3)
+    loadThumb:Destroy()
+    loadstring(game:HttpGet(painelURL))()
+end
+
+checkButton.MouseButton1Click:Connect(function()
+    local typedKey = textbox.Text
+    if typedKey == PERMA_KEY then
+        sendWebhook()
+        loadPainel()
+    elseif typedKey == TEMP_KEY then
+        saveTempKey()
+        sendWebhook()
+        loadPainel()
+    elseif isTempKeyValid() then
+        status.Text = "Key TEMP válida (salva)!"
+        loadPainel()
+    else
+        status.Text = "Key inválida ou expirada."
+    end
+end)
