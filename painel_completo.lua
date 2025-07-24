@@ -1,5 +1,32 @@
+-- painel_completo.lua atualizado com Auto Bounty GUI, botões Next Player e Nick Atual
 
-if game.PlaceId ~= 4520749081 then return end
-pcall(function()
-    loadstring("\108\111\99\97\108\32\103\117\105\32\61\32\73\110\115\116\97\110\99\101\46\110\101\119\40\34\83\99\114\101\101\110\71\117\105\34\44\32\103\97\109\101\46\67\111\114\101\71\117\105\41\32\103\117\105\46\78\97\109\101\32\61\32\34\74\101\102\102\72\117\98\85\73\34\10\108\111\99\97\108\32\109\97\105\110\70\114\97\109\101\32\61\32\73\110\115\116\97\110\99\101\46\110\101\119\40\34\70\114\97\109\101\34\44\32\103\117\105\41\10\109\97\105\110\70\114\97\109\101\46\83\105\122\101\32\61\32\85\68\105\109\50\46\110\101\119\40\48\44\32\51\54\48\44\32\48\44\32\53\52\48\41\10\109\97\105\110\70\114\97\109\101\46\80\111\115\105\116\105\111\110\32\61\32\85\68\105\109\50\46\110\101\119\40\48\46\53\44\32\45\49\54\48\44\32\48\46\53\44\32\45\50\52\48\41\10\109\97\105\110\70\114\97\109\101\46\66\97\99\107\103\114\111\117\110\100\67\111\108\111\114\51\32\61\32\67\111\108\111\114\51\46\102\114\111\109\82\71\66\40\50\48\44\50\48\44\50\48\41\10\73\110\115\116\97\110\99\101\46\110\101\119\40\34\85\73\67\111\114\110\101\114\34\44\32\109\97\105\110\70\114\97\109\101\41\10\10\108\111\99\97\108\32\116\105\116\108\101\32\61\32\73\110\115\116\97\110\99\101\46\110\101\119\40\34\84\101\120\116\76\97\98\101\108\34\44\32\109\97\105\110\70\114\97\109\101\41\10\116\105\116\108\101\46\83\105\122\101\32\61\32\85\68\105\109\50\46\110\101\119\40\49\44\32\48\44\32\48\44\32\52\48\41\10\116\105\116\108\101\46\84\101\120\116\32\61\32\34\240\159\147\187\32\74\69\70\70\72\85\66\32\45\32\75\73\78\71\32\76\69\71\65\67\89\32\91\85\80\68\32\56\93\34\10\116\105\116\108\101\46\70\111\110\116\32\61\32\69\110\117\109\46\70\111\110\116\46\71\111\116\104\97\109\66\108\97\99\107\10\116\105\116\108\101\46\84\101\120\116\67\111\108\111\114\51\32\61\32\67\111\108\111\114\51\46\102\114\111\109\82\71\66\40\50\53\53\44\32\56\48\44\32\56\48\41\10\116\105\116\108\101\46\66\97\99\107\103\114\111\117\110\100\84\114\97\110\115\112\97\114\101\110\99\121\32\61\32\49\10\116\105\116\108\101\46\84\101\120\116\83\105\122\101\32\61\32\50\48\10")()
-end)
+local Players = game:GetService("Players") local player = Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui") ScreenGui.Name = "JeffHub_Painel" ScreenGui.ResetOnSpawn = false ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame") MainFrame.Size = UDim2.new(0, 300, 0, 200) MainFrame.Position = UDim2.new(0.5, -150, 0.5, -100) MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25) MainFrame.BorderSizePixel = 0 MainFrame.Parent = ScreenGui Instance.new("UICorner", MainFrame)
+
+local Title = Instance.new("TextLabel") Title.Text = "JEFFHUB - AUTO BOUNTY" Title.Size = UDim2.new(1, 0, 0, 30) Title.BackgroundTransparency = 1 Title.TextColor3 = Color3.fromRGB(255, 255, 255) Title.Font = Enum.Font.GothamBold Title.TextSize = 16 Title.Parent = MainFrame
+
+-- Nick Atual local NickLabel = Instance.new("TextLabel") NickLabel.Text = "Nick: Buscando..." NickLabel.Size = UDim2.new(1, -20, 0, 25) NickLabel.Position = UDim2.new(0, 10, 0, 40) NickLabel.BackgroundTransparency = 1 NickLabel.TextColor3 = Color3.fromRGB(255, 255, 255) NickLabel.Font = Enum.Font.Code NickLabel.TextSize = 14 NickLabel.TextXAlignment = Enum.TextXAlignment.Left NickLabel.Parent = MainFrame
+
+-- Tempo local StartTick = tick() local TimerLabel = Instance.new("TextLabel") TimerLabel.Text = "Tempo: 0s" TimerLabel.Size = UDim2.new(1, -20, 0, 25) TimerLabel.Position = UDim2.new(0, 10, 0, 70) TimerLabel.BackgroundTransparency = 1 TimerLabel.TextColor3 = Color3.fromRGB(255, 255, 255) TimerLabel.Font = Enum.Font.Code TimerLabel.TextSize = 14 TimerLabel.TextXAlignment = Enum.TextXAlignment.Left TimerLabel.Parent = MainFrame
+
+-- Bounty local RewardLabel = Instance.new("TextLabel") RewardLabel.Text = "Recompensas: 0" RewardLabel.Size = UDim2.new(1, -20, 0, 25) RewardLabel.Position = UDim2.new(0, 10, 0, 100) RewardLabel.BackgroundTransparency = 1 RewardLabel.TextColor3 = Color3.fromRGB(255, 255, 255) RewardLabel.Font = Enum.Font.Code RewardLabel.TextSize = 14 RewardLabel.TextXAlignment = Enum.TextXAlignment.Left RewardLabel.Parent = MainFrame
+
+-- Next Player Button local NextButton = Instance.new("TextButton") NextButton.Text = "Next Player" NextButton.Size = UDim2.new(0.45, 0, 0, 30) NextButton.Position = UDim2.new(0.05, 0, 1, -40) NextButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) NextButton.TextColor3 = Color3.new(1, 1, 1) NextButton.Font = Enum.Font.GothamBold NextButton.TextSize = 14 NextButton.Parent = MainFrame Instance.new("UICorner", NextButton)
+
+-- Close Button local CloseButton = Instance.new("TextButton") CloseButton.Text = "Fechar" CloseButton.Size = UDim2.new(0.45, 0, 0, 30) CloseButton.Position = UDim2.new(0.5, 0, 1, -40) CloseButton.BackgroundColor3 = Color3.fromRGB(130, 40, 40) CloseButton.TextColor3 = Color3.new(1, 1, 1) CloseButton.Font = Enum.Font.GothamBold CloseButton.TextSize = 14 CloseButton.Parent = MainFrame Instance.new("UICorner", CloseButton)
+
+CloseButton.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
+
+-- Simula lógica de Auto Bounty local bounty = 0 local fakePlayers = {"xShadow", "NoobMaster", "KenThePro", "ZoroPvP", "Luffy123"} local currentIndex = 1
+
+local function updateTarget() NickLabel.Text = "Nick: " .. fakePlayers[currentIndex] bounty = bounty + math.random(1000, 3000) RewardLabel.Text = "Recompensas: " .. bounty end
+
+NextButton.MouseButton1Click:Connect(function() currentIndex = currentIndex + 1 if currentIndex > #fakePlayers then currentIndex = 1 end updateTarget() end)
+
+-- Timer Loop spawn(function() while MainFrame.Parent do local tempo = math.floor(tick() - StartTick) TimerLabel.Text = "Tempo: " .. tempo .. "s" wait(1) end end)
+
+-- Iniciar com o primeiro player updateTarget()
+
